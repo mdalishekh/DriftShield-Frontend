@@ -12,6 +12,11 @@ from utils.helpers import (
 )
 
 
+st.set_page_config(
+    page_title="Model Registry",
+    layout="wide"
+)
+
 st.title("Model Registry")
 
 

@@ -8,7 +8,10 @@ from utils.sample_data import (
 )
 
 
-
+st.set_page_config(
+    page_title="Prediction",
+    layout="wide"
+)
 st.title("Loan Default Prediction")
 
 

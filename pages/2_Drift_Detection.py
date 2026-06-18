@@ -10,7 +10,6 @@ from utils.helpers import get_drift_report_html
 
 st.set_page_config(
     page_title="Drift Monitoring",
-    page_icon="🛡️",
     layout="wide"
 )
 
