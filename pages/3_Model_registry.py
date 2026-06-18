@@ -15,9 +15,9 @@ from utils.helpers import (
 st.title("Model Registry")
 
 
-# --------------------------------------------------
+
 # Session State
-# --------------------------------------------------
+
 
 if "refresh_models" not in st.session_state:
     st.session_state.refresh_models = True
@@ -26,9 +26,9 @@ if "models_data" not in st.session_state:
     st.session_state.models_data = []
 
 
-# --------------------------------------------------
+
 # Load Models
-# --------------------------------------------------
+
 
 if st.session_state.refresh_models:
 
@@ -47,9 +47,9 @@ if st.session_state.refresh_models:
         st.error(f"Failed to load models: {e}")
 
 
-# --------------------------------------------------
+
 # Upload Section
-# --------------------------------------------------
+
 
 st.subheader("Upload New Model")
 
@@ -117,9 +117,9 @@ with st.form("upload_form"):
 st.divider()
 
 
-# --------------------------------------------------
+
 # Models Table
-# --------------------------------------------------
+
 
 st.subheader("Registered Models")
 

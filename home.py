@@ -7,6 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
+
 st.title("🛡️ DriftShield")
 
 st.write(
@@ -18,8 +19,7 @@ text = """
 
 A production-ready Machine Learning Monitoring Platform.
 
-An LLM response will be displayed here in very shortly so the animation will fell like 
-an AI is repsonding the the users and giving answers.
+A Brief intro will be here
 
 More features coming soon...
 """
