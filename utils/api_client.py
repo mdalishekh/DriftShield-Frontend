@@ -1,8 +1,7 @@
 import requests
+from config.config import ENV
 
 
-# BASE_URL = "http://localhost:8000"
-BASE_URL = "http://35.153.231.152:8000"
 
 
 def predict_loan(payload: dict) -> dict:
@@ -10,7 +9,7 @@ def predict_loan(payload: dict) -> dict:
     try:
 
         response = requests.post(
-            f"{BASE_URL}/api/v1/prediction",
+            f"{ENV.BASE_URL}/api/v1/prediction",
             json=payload,
             timeout=30
         )
@@ -27,15 +26,10 @@ def predict_loan(payload: dict) -> dict:
         
         
         
-        
-        
-        
-
-
 def get_models():
 
     response = requests.get(
-        f"{BASE_URL}/api/v1/models/list",
+        f"{ENV.BASE_URL}/api/v1/models/list",
         timeout=30
     )
 
@@ -44,12 +38,11 @@ def get_models():
     return response.json()
 
 
-def activate_model(
-    model_id: int
-):
+
+def activate_model(model_id: int):
 
     response = requests.put(
-        f"{BASE_URL}/api/v1/models/activate/{model_id}",
+        f"{ENV.BASE_URL}/api/v1/models/activate/{model_id}",
         timeout=30
     )
 
@@ -58,12 +51,10 @@ def activate_model(
     return response.json()
 
 
-def delete_model(
-    model_id: int
-):
+def delete_model(model_id: int):
 
     response = requests.delete(
-        f"{BASE_URL}/api/v1/models/delete/{model_id}",
+        f"{ENV.BASE_URL}/api/v1/models/delete/{model_id}",
         timeout=30
     )
 
@@ -103,7 +94,7 @@ def upload_model(
     }
 
     response = requests.post(
-        f"{BASE_URL}/api/v1/models/upload",
+        f"{ENV.BASE_URL}/api/v1/models/upload",
         files=files,
         timeout=120
     )
@@ -115,9 +106,6 @@ def upload_model(
 
 
 
-
-
-
 def generate_drift_report():
     """
     Generate Evidently drift report.
@@ -125,7 +113,7 @@ def generate_drift_report():
 
     try:
         response = requests.post(
-            f"{BASE_URL}/api/v1/drift/report",
+            f"{ENV.BASE_URL}/api/v1/drift/report",
             timeout=300
         )
 
@@ -140,6 +128,7 @@ def generate_drift_report():
         }
 
 
+
 def generate_drift_insights():
     """
     Generate LLM drift insights.
@@ -147,7 +136,7 @@ def generate_drift_insights():
 
     try:
         response = requests.post(
-            f"{BASE_URL}/api/v1/drift/insights",
+            f"{ENV.BASE_URL}/api/v1/drift/insights",
             timeout=300
         )
 

@@ -1,5 +1,7 @@
 import streamlit as st
 import time
+from pathlib import Path
+import pandas as pd
 
 
 def render_llm_response(
@@ -47,7 +49,6 @@ def render_prediction_result(
     
     
 
-import pandas as pd
 
 
 def prepare_models_dataframe(
@@ -84,7 +85,6 @@ def prepare_models_dataframe(
     return df   
 
 
-from pathlib import Path
 
 
 def get_drift_report_html():
