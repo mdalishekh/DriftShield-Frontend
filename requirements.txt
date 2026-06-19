@@ -2,3 +2,4 @@ python-multipart
 streamlit
 python-dotenv
 pandas
+requests
