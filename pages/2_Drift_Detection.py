@@ -121,7 +121,7 @@ if st.session_state.drift_html:
     width=None,
     scrolling=True
 )
-
+    st.toast("Close sidebar to get full View")
     st.divider()
 
     
