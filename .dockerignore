@@ -9,7 +9,7 @@ models/
 metrics/
 csv/
 reports/
-
+*.md
 # C extensions
 *.so
 
