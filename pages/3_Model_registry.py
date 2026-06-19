@@ -1,5 +1,4 @@
 import streamlit as st
-
 from utils.api_client import (
     get_models,
     upload_model,
@@ -30,6 +29,14 @@ if "refresh_models" not in st.session_state:
 if "models_data" not in st.session_state:
     st.session_state.models_data = []
 
+
+if "toast_message" in st.session_state:
+
+    st.toast(
+        st.session_state.toast_message
+    )
+
+    del st.session_state.toast_message
 
 
 # Load Models
@@ -109,8 +116,8 @@ with st.form("upload_form"):
                     reference_csv_file=reference_csv_file
                 )
 
-                st.success("Model uploaded successfully.")
-
+                st.session_state.toast_message = (f"Model uploaded")
+                
                 st.session_state.refresh_models = True
 
                 st.rerun()
@@ -179,7 +186,7 @@ else:
                 try:
 
                     activate_model(model["id"])
-                    st.success("Model activated.")
+                    st.session_state.toast_message = (f"Model Activated (ID : {model['id']})")
                     st.session_state.refresh_models = True
                     st.rerun()
 
@@ -199,7 +206,7 @@ else:
 
                 try:
                     delete_model(model["id"])
-                    st.success("Model deleted.")
+                    st.session_state.toast_message = (f"Model Deleted (ID : {model['id']})")
                     st.session_state.refresh_models = True
                     st.rerun()
 
