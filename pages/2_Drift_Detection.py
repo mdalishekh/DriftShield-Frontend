@@ -40,7 +40,7 @@ if st.button(
 
     
     # Generate Drift Report
-    
+    st.toast("Report generation with Evidently may take few seconds")
 
     with st.spinner(
         "Generating Drift Detection Report With Evidently AI..."
@@ -48,28 +48,28 @@ if st.button(
 
         report_response = generate_drift_report()
 
-    if report_response.get("status") != "success":
+        if report_response.get("status") != "success":
 
-        st.error(
-            report_response.get(
-                "message",
-                "Failed to generate drift report."
+            st.error(
+                report_response.get(
+                    "message",
+                    "Failed to generate drift report."
+                )
             )
-        )
 
-        st.stop()
+            st.stop()
 
-    html_content = get_drift_report_html()
+        html_content = get_drift_report_html()
 
-    if html_content is None:
+        if html_content is None:
 
-        st.error(
-            "drift_report.html not found."
-        )
+            st.error(
+                "drift_report.html not found."
+            )
 
-        st.stop()
+            st.stop()
 
-    st.session_state.drift_html = html_content
+        st.session_state.drift_html = html_content
 
     
     # Generate Insights
@@ -81,32 +81,32 @@ if st.button(
 
         insight_response = generate_drift_insights()
 
-    if insight_response.get("status") != "success":
+        if insight_response.get("status") != "success":
 
-        st.error(
-            insight_response.get(
-                "message",
-                "Failed to generate drift insights."
+            st.error(
+                insight_response.get(
+                    "message",
+                    "Failed to generate drift insights."
+                )
             )
-        )
 
-    else:
+        else:
 
-        st.session_state.drift_status = (
-            insight_response.get(
-                "drift_status",
-                "UNKNOWN"
+            st.session_state.drift_status = (
+                insight_response.get(
+                    "drift_status",
+                    "UNKNOWN"
+                )
             )
-        )
 
-        st.session_state.drift_llm_response = (
-            insight_response.get(
-                "llm_response",
-                ""
+            st.session_state.drift_llm_response = (
+                insight_response.get(
+                    "llm_response",
+                    ""
+                )
             )
-        )
 
-    st.rerun()
+        st.rerun()
 
 
 
@@ -114,7 +114,7 @@ if st.button(
 
 
 if st.session_state.drift_html:
-
+    
     components.html(
     st.session_state.drift_html,
     height=1200,
