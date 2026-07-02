@@ -84,7 +84,8 @@ https://github.com/mdalishekh/DriftShield
 ### Backend Project Structure
 
 See:
-Frontend-Structure.md
+
+[Frontend Project Structure](Frontend-Structure.md)
 
 ### Deployment Architecture
 
