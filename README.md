@@ -1,8 +1,8 @@
+
 # DriftShield-Frontend
 
 
-![Python](https://img.shields.io/badge/Python-3.13-blue) ![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red) ![FastAPI](https://img.shields.io/badge/FastAPI-0.116-green) ![Docker](https://img.shields.io/badge/Docker-Container-blue)  ![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20RDS%20%7C%20EBS-orange) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue) ![XGBoost](https://img.shields.io/badge/XGBoost-ML-red) 
-
+![Python](https://img.shields.io/badge/Python-3.13-blue) ![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red) ![FastAPI](https://img.shields.io/badge/FastAPI-0.116-green) ![Docker](https://img.shields.io/badge/Docker-Container-blue) ![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20RDS%20%7C%20EBS-orange) 
 ---
 
 # Project Overview
