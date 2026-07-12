@@ -1,3 +1,4 @@
+# Using slim python image to create light image
 FROM python:3.12-slim
 
 WORKDIR /app
