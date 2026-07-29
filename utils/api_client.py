@@ -2,6 +2,7 @@ import requests
 from config.config import ENV
 
 
+# New Models and database to be added soon
 
 
 def predict_loan(payload: dict) -> dict:
