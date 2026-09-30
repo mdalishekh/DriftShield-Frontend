@@ -43,10 +43,7 @@ with col1:
         "Age",
         min_value=18,
         max_value=100,
-        value=st.session_state.get(
-            "sample_age",
-            25
-        ),
+        value=st.session_state.get("sample_age", 25),
         key="age"
     )
 
@@ -160,9 +157,7 @@ payload = {
     "employment_type": employment_type
 }
 
-predict_clicked = st.button(
-    "Predict Default", type="primary"
-)
+predict_clicked = st.button("Predict Default", type="primary")
 
 if predict_clicked:
 
@@ -172,17 +167,13 @@ if predict_clicked:
             "Predicting default risk and generating AI-powered loan recommendations..."
         ):
 
-            result = predict_loan(
-                payload
-            )
+            result = predict_loan(payload)
 
         st.session_state.prediction_result = result
-
         st.rerun()
 
     except Exception as e:
-
-        st.error(str(e))
+        st.error("Unable to process the prediction. Please try again.")
 
 
 

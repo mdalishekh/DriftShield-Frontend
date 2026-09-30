@@ -42,31 +42,19 @@ if st.button(
     # Generate Drift Report
     st.toast("Report generation with Evidently may take few seconds")
 
-    with st.spinner(
-        "Generating Drift Detection Report With Evidently AI..."
-    ):
+    with st.spinner("Generating Drift Detection Report With Evidently AI..."):
 
         report_response = generate_drift_report()
 
         if report_response.get("status") != "success":
-
-            st.error(
-                report_response.get(
-                    "message",
-                    "Failed to generate drift report."
-                )
-            )
-
+            st.error("Unable to generate drift report. Please try again.")
             st.stop()
 
         html_content = get_drift_report_html()
 
         if html_content is None:
 
-            st.error(
-                "drift_report.html not found."
-            )
-
+            st.error("drift_report.html not found.")
             st.stop()
 
         st.session_state.drift_html = html_content
@@ -75,35 +63,21 @@ if st.button(
     # Generate Insights
     
 
-    with st.spinner(
-        "Getting AI Insights for Drift Detection..."
-    ):
+    with st.spinner("Getting AI Insights for Drift Detection..."):
 
         insight_response = generate_drift_insights()
 
         if insight_response.get("status") != "success":
-
-            st.error(
-                insight_response.get(
-                    "message",
-                    "Failed to generate drift insights."
-                )
-            )
+            st.error("Unable to generate drift insights. Please try again.")
 
         else:
 
             st.session_state.drift_status = (
-                insight_response.get(
-                    "drift_status",
-                    "UNKNOWN"
-                )
+                insight_response.get("drift_status", "UNKNOWN")
             )
 
             st.session_state.drift_llm_response = (
-                insight_response.get(
-                    "llm_response",
-                    ""
-                )
+                insight_response.get("llm_response", "Unable to generate AI insights.")
             )
 
         st.rerun()
@@ -130,47 +104,25 @@ if st.session_state.drift_html:
 
     if st.session_state.drift_status:
 
-        status = (
-            st.session_state.drift_status
-            .upper()
-        )
+        status = (st.session_state.drift_status.upper())
 
         if status == "HEALTHY":
-
-            st.success(
-                f"Drift Status : {status}"
-            )
+            st.success(f"Drift Status : {status}")
 
         elif status == "MODERATE":
-
-            st.info(
-                f"Drift Status : {status}"
-            )
+            st.info(f"Drift Status : {status}")
 
         elif status == "WARNING":
-
-            st.warning(
-                f"Drift Status : {status}"
-            )
+            st.warning(f"Drift Status : {status}")
 
         elif status == "CRITICAL":
-
-            st.error(
-                f"Drift Status : {status}"
-            )
+            st.error(f"Drift Status : {status}")
 
         else:
-
-            st.info(
-                f"Drift Status : {status}"
-            )
+            st.info(f"Drift Status : {status}")
 
     
     # LLM Insights
     
-
     if st.session_state.drift_llm_response:
-
-        st.markdown(
-            st.session_state.drift_llm_response
-        )
+        st.markdown(st.session_state.drift_llm_response)

@@ -9,7 +9,7 @@ def predict_loan(payload: dict) -> dict:
     try:
 
         response = requests.post(
-            f"{ENV.BASE_URL}/api/v1/prediction",
+            f"{ENV.BASE_URL}/api/v2/prediction",
             json=payload,
             timeout=30
         )
@@ -29,7 +29,7 @@ def predict_loan(payload: dict) -> dict:
 def get_models():
 
     response = requests.get(
-        f"{ENV.BASE_URL}/api/v1/models/list",
+        f"{ENV.BASE_URL}/api/v2/models/list",
         timeout=30
     )
 
@@ -42,7 +42,7 @@ def get_models():
 def activate_model(model_id: int):
 
     response = requests.put(
-        f"{ENV.BASE_URL}/api/v1/models/activate/{model_id}",
+        f"{ENV.BASE_URL}/api/v2/models/activate/{model_id}",
         timeout=30
     )
 
@@ -54,7 +54,7 @@ def activate_model(model_id: int):
 def delete_model(model_id: int):
 
     response = requests.delete(
-        f"{ENV.BASE_URL}/api/v1/models/delete/{model_id}",
+        f"{ENV.BASE_URL}/api/v2/models/delete/{model_id}",
         timeout=30
     )
 
@@ -65,7 +65,6 @@ def delete_model(model_id: int):
 
 def upload_model(
     model_file,
-    scaler_file,
     metrics_file,
     reference_csv_file
 ):
@@ -94,7 +93,7 @@ def upload_model(
     }
 
     response = requests.post(
-        f"{ENV.BASE_URL}/api/v1/models/upload",
+        f"{ENV.BASE_URL}/api/v2/models/upload",
         files=files,
         timeout=120
     )
@@ -113,7 +112,7 @@ def generate_drift_report():
 
     try:
         response = requests.post(
-            f"{ENV.BASE_URL}/api/v1/drift/report",
+            f"{ENV.BASE_URL}/api/v2/drift/report",
             timeout=300
         )
 
@@ -136,7 +135,7 @@ def generate_drift_insights():
 
     try:
         response = requests.post(
-            f"{ENV.BASE_URL}/api/v1/drift/insights",
+            f"{ENV.BASE_URL}/api/v2/drift/insights",
             timeout=300
         )
 

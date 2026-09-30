@@ -5,10 +5,7 @@ from utils.api_client import (
     activate_model,
     delete_model
 )
-
-from utils.helpers import (
-    prepare_models_dataframe
-)
+from utils.helpers import (prepare_models_dataframe)
 
 
 st.set_page_config(
@@ -32,9 +29,7 @@ if "models_data" not in st.session_state:
 
 if "toast_message" in st.session_state:
 
-    st.toast(
-        st.session_state.toast_message
-    )
+    st.toast(st.session_state.toast_message)
 
     del st.session_state.toast_message
 
@@ -45,9 +40,7 @@ if "toast_message" in st.session_state:
 if st.session_state.refresh_models:
 
     try:
-
         response = get_models()
-
         st.session_state.models_data = (
             response["models"]
         )
@@ -55,8 +48,7 @@ if st.session_state.refresh_models:
         st.session_state.refresh_models = False
 
     except Exception as e:
-
-        st.error(f"Failed to load models: {e}")
+        st.error("Unable to load models. Please try again.")
 
 
 
@@ -69,15 +61,9 @@ st.subheader("Upload New Model")
 with st.form("upload_form"):
 
     model_file = st.file_uploader(
-        "Model File (.pkl)",
-        type=["pkl"],
+        "Model File (.json)",
+        type=["json"],
         key="model_file"
-    )
-
-    scaler_file = st.file_uploader(
-        "Scaler File (.pkl)",
-        type=["pkl"],
-        key="scaler_file"
     )
 
     metrics_file = st.file_uploader(
@@ -98,7 +84,6 @@ with st.form("upload_form"):
 
         if (
             model_file is None
-            or scaler_file is None
             or metrics_file is None
             or reference_csv_file is None
         ):
@@ -111,43 +96,33 @@ with st.form("upload_form"):
 
                 upload_model(
                     model_file=model_file,
-                    scaler_file=scaler_file,
                     metrics_file=metrics_file,
                     reference_csv_file=reference_csv_file
                 )
 
-                st.session_state.toast_message = (f"Model uploaded")
-                
+                st.session_state.toast_message = "Model uploaded successfully"
                 st.session_state.refresh_models = True
-
                 st.rerun()
 
             except Exception as e:
-                st.error(f"Upload failed: {e}")
+                st.error("Unable to upload model. Please try again.")
 
 
 st.divider()
 
-
-
 # Models Table
-
-
 st.subheader("Registered Models")
-
 
 models = st.session_state.models_data
 
 
 if not models:
-
     st.info("No models available.")
 
 else:
 
     df = prepare_models_dataframe(models)
-
-    st.dataframe(df,width='stretch')
+    st.dataframe(df, width='stretch')
 
     st.divider()
 
@@ -184,15 +159,13 @@ else:
             if activate_clicked:
 
                 try:
-
                     activate_model(model["id"])
-                    st.session_state.toast_message = (f"Model Activated (ID : {model['id']})")
+                    st.session_state.toast_message = f"Model activated successfully - ID {model['id']})"
                     st.session_state.refresh_models = True
                     st.rerun()
 
                 except Exception as e:
-
-                    st.error(str(e))
+                    st.error("Unable to activate model. Please try again.")
 
         with col3:
 
@@ -206,17 +179,12 @@ else:
 
                 try:
                     delete_model(model["id"])
-                    st.session_state.toast_message = (f"Model Deleted (ID : {model['id']})")
+                    st.session_state.toast_message = f"Model deleted successfully - ID {model['id']})"
                     st.session_state.refresh_models = True
                     st.rerun()
 
                 except Exception as e:
-
-                    st.error(str(e))
+                    st.error("Unable to delete model. Please try again.")
 
         with col4:
-
-            st.write(
-                f"Uploaded: "
-                f"{model['uploaded_at'][:10]}"
-            )
+            st.write(f"Uploaded: "f"{model['uploaded_at'][:10]}")
