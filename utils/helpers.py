@@ -12,7 +12,6 @@ def render_llm_response(
 ) -> None:
 
     placeholder = st.empty()
-
     rendered_text = ""
 
     for char in text:
@@ -25,9 +24,7 @@ def render_llm_response(
 
         time.sleep(speed)
 
-    placeholder.markdown(
-        rendered_text
-    )
+    placeholder.markdown(rendered_text)  
 
 
 def render_prediction_result(
@@ -35,12 +32,11 @@ def render_prediction_result(
 ) -> None:
 
     default_data = result["prediction"]
-    default_status = ("Yes" if default_data["default"] else "No")
+    default_status = "Yes" if default_data["default"] else "No"  
 
     st.subheader("Prediction Result")
 
     st.markdown(f"### Default Status : **{default_status}**")
-
     st.markdown(f"### Default Probability : **{default_data['probability']} %**")
 
     st.divider()
@@ -48,9 +44,6 @@ def render_prediction_result(
     st.subheader("LLM Suggestion")
 
     render_llm_response(result["llm_response"])
-    
-    
-
 
 
 def prepare_models_dataframe(
@@ -61,32 +54,26 @@ def prepare_models_dataframe(
 
     if df.empty:
         return df
-    
+
     for col in ["uploaded_at", "activated_at"]:
 
-        df[col] = pd.to_datetime(
-            df[col]
-        ).dt.strftime(
+        df[col] = pd.to_datetime(df[col]).dt.strftime(  
             "%Y-%m-%d %H:%M:%S"
         )
-
 
     df = df.rename(
         columns={
             "id": "ID",
             "model_name": "Model Name",
-            "scaler_name": "Scaler Name",
-            "metrics_name": "Metrics File",
-            "reference_csv_name" : "Reference CSV",
+            "metrics_name": "Metrics File",  
+            "reference_csv_name": "Reference CSV",  
             "uploaded_at": "Uploaded At",
             "activated_at": "Activated At",
             "is_active": "Active"
         }
     )
 
-    return df   
-
-
+    return df
 
 
 def get_drift_report_html():

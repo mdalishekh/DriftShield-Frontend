@@ -8,7 +8,6 @@ from config.config import ENV
 def predict_loan(payload: dict) -> dict:
 
     try:
-
         response = requests.post(
             f"{ENV.BASE_URL}/api/v2/prediction",
             json=payload,
@@ -16,52 +15,57 @@ def predict_loan(payload: dict) -> dict:
         )
 
         response.raise_for_status()
-
         return response.json()
 
     except requests.exceptions.RequestException as e:
-
         raise Exception(
             f"Prediction API request failed: {str(e)}"
         )
-        
-        
-        
+
+
 def get_models():
 
-    response = requests.get(
-        f"{ENV.BASE_URL}/api/v2/models/list",
-        timeout=30
-    )
+    try:  
+        response = requests.get(
+            f"{ENV.BASE_URL}/api/v2/models/list",
+            timeout=30
+        )
+        response.raise_for_status()
 
-    response.raise_for_status()
+        return response.json()
 
-    return response.json()
-
+    except requests.exceptions.RequestException as e:  
+        raise Exception(f"Model list request failed: {str(e)}")  
 
 
 def activate_model(model_id: int):
 
-    response = requests.put(
-        f"{ENV.BASE_URL}/api/v2/models/activate/{model_id}",
-        timeout=30
-    )
+    try:  
+        response = requests.put(
+            f"{ENV.BASE_URL}/api/v2/models/activate/{model_id}",
+            timeout=30
+        )
+        response.raise_for_status()
 
-    response.raise_for_status()
+        return response.json()
 
-    return response.json()
+    except requests.exceptions.RequestException as e:  
+        raise Exception(f"Model activation request failed: {str(e)}")  
 
 
 def delete_model(model_id: int):
 
-    response = requests.delete(
-        f"{ENV.BASE_URL}/api/v2/models/delete/{model_id}",
-        timeout=30
-    )
+    try:  
+        response = requests.delete(
+            f"{ENV.BASE_URL}/api/v2/models/delete/{model_id}",
+            timeout=30
+        )
+        response.raise_for_status()
 
-    response.raise_for_status()
+        return response.json()
 
-    return response.json()
+    except requests.exceptions.RequestException as e:  
+        raise Exception(f"Model deletion request failed: {str(e)}")  
 
 
 def upload_model(
@@ -76,11 +80,6 @@ def upload_model(
             model_file,
             "application/octet-stream"
         ),
-        "scaler_file": (
-            scaler_file.name,
-            scaler_file,
-            "application/octet-stream"
-        ),
         "metrics_file": (
             metrics_file.name,
             metrics_file,
@@ -93,17 +92,19 @@ def upload_model(
         )
     }
 
-    response = requests.post(
-        f"{ENV.BASE_URL}/api/v2/models/upload",
-        files=files,
-        timeout=120
-    )
+    try:  
+        response = requests.post(
+            f"{ENV.BASE_URL}/api/v2/models/upload",
+            files=files,
+            timeout=120
+        )
 
-    response.raise_for_status()
+        response.raise_for_status()
 
-    return response.json()        
+        return response.json()
 
-
+    except requests.exceptions.RequestException as e:  
+        raise Exception(f"Model upload request failed: {str(e)}")  
 
 
 def generate_drift_report():
@@ -126,7 +127,6 @@ def generate_drift_report():
             "status": "error",
             "message": str(e)
         }
-
 
 
 def generate_drift_insights():

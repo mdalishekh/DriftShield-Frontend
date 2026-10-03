@@ -17,10 +17,7 @@ def generate_sample_data():
         EMPLOYMENT_TYPES
     )
 
-    if employment_type in [
-        "Gig Worker",
-        "Retired"
-    ]:
+    if employment_type in ["Gig Worker", "Retired"]:
         employed = "No"
     else:
         employed = "Yes"
