@@ -40,7 +40,7 @@ if st.button(
 
     
     # Generate Drift Report
-    st.toast("Report generation with Evidently may take few seconds")
+    st.toast("Report generation with Evidently may take few seconds", duration="long")
 
     with st.spinner("Generating Drift Detection Report With Evidently AI..."):
 
@@ -95,7 +95,7 @@ if st.session_state.drift_html:
     width=None,
     scrolling=True
 )
-    st.toast("Close sidebar to get full View")
+    st.toast("Close sidebar to get full View", duration="long")
     st.divider()
 
     

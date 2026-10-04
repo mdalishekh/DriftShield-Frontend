@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 from config.config import ENV
 
 st.set_page_config(
@@ -8,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.toast("👈 Use the sidebar to access all pages.")
+st.toast("⬅️ Use the sidebar to access all pages.", duration="long")
 
 st.markdown(
     f"""
@@ -219,5 +218,3 @@ DriftShield is a portfolio project created to demonstrate practical Machine Lear
 """
 )
 
-time.sleep(5)
-st.toast("👈 Use the sidebar to access all pages.")

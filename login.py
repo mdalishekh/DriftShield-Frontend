@@ -1,0 +1,81 @@
+import streamlit as st
+
+st.set_page_config(
+    page_title="Login",
+    page_icon="🔐",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
+
+
+# Hide sidebar and navigation on login page
+st.markdown(
+    """
+    <style>
+        [data-testid="stSidebar"] {
+            display: none;
+        }
+
+        [data-testid="stSidebarNav"] {
+            display: none;
+        }
+
+        .block-container {
+            max-width: 420px;
+            padding-top: 8rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.toast(
+    "https://github.com/mdalishekh/DriftShield-Frontend/blob/main/README.md",
+    duration="long"
+)
+
+st.toast(
+    "Please login with ID & Password to get full access. Get Id/Pass from here ⬇️",
+    duration="long"
+)
+
+st.title("DriftShield")
+st.subheader("Login")
+
+
+login_id = st.text_input(
+    "Email or Username",
+    placeholder="Enter your email or username"
+)
+
+password = st.text_input(
+    "Password",
+    type="password",
+    placeholder="Enter your password"
+)
+
+
+login_clicked = st.button(
+    "Login",
+    type="primary",
+    use_container_width=True
+)
+
+guest_clicked = st.button(
+    "Continue as Guest?",
+    use_container_width=True
+)
+
+
+# Temporary login logic
+if login_clicked:
+    if login_id and password:
+        st.session_state.logged_in = True
+        st.rerun()
+    else:
+        st.warning("Please enter ID and Password.")
+
+
+if guest_clicked:
+    st.session_state.logged_in = True
+    st.rerun()
