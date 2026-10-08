@@ -16,8 +16,6 @@ st.title("Loan Default Prediction")
 
 
 # Session State Initialization
-
-
 if "initialized" not in st.session_state:
 
     sample_data = generate_sample_data()
@@ -33,8 +31,6 @@ if "initialized" not in st.session_state:
 
 
 # Input Fields
-
-
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -139,8 +135,6 @@ with col3:
 
 
 # Predict Button
-
-
 payload = {
     "age": age,
     "income": income,
@@ -178,7 +172,6 @@ if predict_clicked:
 
 
 # Prediction Result
-
 if st.session_state.prediction_result is not None:
 
     st.markdown("---")

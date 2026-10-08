@@ -1,10 +1,41 @@
 import requests
+import streamlit as st
 from config.config import ENV
 
 
-# New Models and database to be added soon
+# Authentication
+def login_user(login_id: str, password: str) -> dict:
+
+    try:
+        response = requests.post(
+            f"{ENV.BASE_URL}/api/v2/auth/login",
+            json={
+                "login_id": login_id,
+                "password": password
+            },
+            timeout=30
+        )
+
+        response.raise_for_status()
+
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Login request failed: {str(e)}")
 
 
+def get_auth_headers() -> dict:
+
+    token = st.session_state.get("access_token")
+    if not token:
+        return {}
+
+    return {
+        "Authorization": f"Bearer {token}"
+    }
+
+
+# Prediction
 def predict_loan(payload: dict) -> dict:
 
     try:
@@ -23,49 +54,52 @@ def predict_loan(payload: dict) -> dict:
         )
 
 
+# Model Registry
 def get_models():
 
-    try:  
+    try:
         response = requests.get(
             f"{ENV.BASE_URL}/api/v2/models/list",
             timeout=30
         )
-        response.raise_for_status()
 
+        response.raise_for_status()
         return response.json()
 
-    except requests.exceptions.RequestException as e:  
-        raise Exception(f"Model list request failed: {str(e)}")  
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Model list request failed: {str(e)}")
 
 
 def activate_model(model_id: int):
 
-    try:  
+    try:
         response = requests.put(
             f"{ENV.BASE_URL}/api/v2/models/activate/{model_id}",
+            headers=get_auth_headers(),
             timeout=30
         )
-        response.raise_for_status()
 
+        response.raise_for_status()
         return response.json()
 
-    except requests.exceptions.RequestException as e:  
-        raise Exception(f"Model activation request failed: {str(e)}")  
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Model activation request failed: {str(e)}")
 
 
 def delete_model(model_id: int):
 
-    try:  
+    try:
         response = requests.delete(
             f"{ENV.BASE_URL}/api/v2/models/delete/{model_id}",
+            headers=get_auth_headers(),
             timeout=30
         )
-        response.raise_for_status()
 
+        response.raise_for_status()
         return response.json()
 
-    except requests.exceptions.RequestException as e:  
-        raise Exception(f"Model deletion request failed: {str(e)}")  
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Model deletion request failed: {str(e)}")
 
 
 def upload_model(
@@ -92,25 +126,23 @@ def upload_model(
         )
     }
 
-    try:  
+    try:
         response = requests.post(
             f"{ENV.BASE_URL}/api/v2/models/upload",
             files=files,
+            headers=get_auth_headers(),
             timeout=120
         )
 
         response.raise_for_status()
-
         return response.json()
 
-    except requests.exceptions.RequestException as e:  
-        raise Exception(f"Model upload request failed: {str(e)}")  
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Model upload request failed: {str(e)}")
 
 
+# Drift
 def generate_drift_report():
-    """
-    Generate Evidently drift report.
-    """
 
     try:
         response = requests.post(
@@ -119,7 +151,6 @@ def generate_drift_report():
         )
 
         response.raise_for_status()
-
         return response.json()
 
     except requests.exceptions.RequestException as e:
@@ -130,9 +161,6 @@ def generate_drift_report():
 
 
 def generate_drift_insights():
-    """
-    Generate LLM drift insights.
-    """
 
     try:
         response = requests.post(
@@ -141,7 +169,6 @@ def generate_drift_insights():
         )
 
         response.raise_for_status()
-
         return response.json()
 
     except requests.exceptions.RequestException as e:

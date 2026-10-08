@@ -13,14 +13,8 @@ EMPLOYMENT_TYPES = [
 
 def generate_sample_data():
 
-    employment_type = random.choice(
-        EMPLOYMENT_TYPES
-    )
-
-    if employment_type in ["Gig Worker", "Retired"]:
-        employed = "No"
-    else:
-        employed = "Yes"
+    employment_type = random.choice(EMPLOYMENT_TYPES)        
+    employed = "No" if employment_type in ["Gig Worker", "Retired"] else "Yes"  
 
     return {
         "age": random.randint(21, 75),

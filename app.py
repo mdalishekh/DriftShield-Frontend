@@ -3,6 +3,10 @@ import streamlit as st
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
+if "access_token" not in st.session_state:
+    st.session_state.access_token = None
+
+
 if not st.session_state.logged_in:
     login = st.Page("login.py", title="Login", icon="🔐")
     st.navigation([login], position="hidden").run()

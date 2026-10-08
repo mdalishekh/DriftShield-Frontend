@@ -7,7 +7,6 @@ from utils.api_client import (
 from utils.helpers import get_drift_report_html
 
 
-
 st.set_page_config(
     page_title="Drift Monitoring",
     layout="wide"
@@ -17,8 +16,6 @@ st.title("Drift Detection")
 
 
 # Session State Initialization
-
-
 if "drift_html" not in st.session_state:
     st.session_state.drift_html = None
 
@@ -31,8 +28,6 @@ if "drift_llm_response" not in st.session_state:
 
 
 # Generate Report Button
-
-
 if st.button(
     "Generate Report",
     type="primary"
@@ -61,8 +56,6 @@ if st.button(
 
     
     # Generate Insights
-    
-
     with st.spinner("Getting AI Insights for Drift Detection..."):
 
         insight_response = generate_drift_insights()
@@ -85,8 +78,6 @@ if st.button(
 
 
 # Render Drift Report
-
-
 if st.session_state.drift_html:
     
     components.html(
@@ -100,8 +91,6 @@ if st.session_state.drift_html:
 
     
     # Drift Status
-    
-
     if st.session_state.drift_status:
 
         status = (st.session_state.drift_status.upper())

@@ -4,8 +4,7 @@ from pathlib import Path
 import pandas as pd
 
 
-# Rendering LLm response as chunk animation
-
+# Rendering LLm response as chunks printing animation
 def render_llm_response(
     text: str,
     speed: float = 0.01
