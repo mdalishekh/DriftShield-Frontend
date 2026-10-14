@@ -88,7 +88,6 @@ The platform includes a lightweight model registry for managing multiple model v
 Supported capabilities:
 
 * Upload model artifacts
-* Upload scaler files
 * Upload evaluation metrics
 * Upload reference datasets
 * Activate models dynamically
@@ -179,7 +178,7 @@ Manage model versions, activate models, and maintain deployment-ready artifacts.
 
 * Docker
 * GitHub Actions
-* AWS EC2
+* AWS
 
 ---
 

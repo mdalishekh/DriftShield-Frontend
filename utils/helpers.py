@@ -40,7 +40,7 @@ def render_prediction_result(
 
     st.divider()
 
-    st.subheader("LLM Suggestion")
+    st.subheader("Loan Assessment with AI ✨")
 
     render_llm_response(result["llm_response"])
 

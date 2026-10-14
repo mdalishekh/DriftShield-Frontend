@@ -33,12 +33,7 @@ st.markdown(
 
 
 st.toast(
-    "https://github.com/mdalishekh/DriftShield-Frontend/blob/main/README.md",
-    duration="long"
-)
-
-st.toast(
-    "Please login with ID & Password to get full access. Get Id/Pass from here ⬇️",
+    "Please login with ID & Password to get full access. [id: admin  pass: admin123]",
     duration="long"
 )
 
